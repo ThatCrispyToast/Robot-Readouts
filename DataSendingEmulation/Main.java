@@ -1,5 +1,5 @@
 // Remove "JavaSending" When Shipping to FTC Code
-package JavaSending;
+package DataSendingEmulation;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
