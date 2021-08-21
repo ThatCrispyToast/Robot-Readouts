@@ -1,6 +1,6 @@
 import socket
 
-response = ''
+response = "{'Rotation': 0.0000, 'Motors': ('PWR','PWR','PWR','PWR')}"
 
 def recieve():
     global response
@@ -18,6 +18,5 @@ def recieve():
     while True:
         c, addr = s.accept()
         response = c.recv(1024)[:-2].decode()
-        print(response)
         # c.send(f'Recieved {response}!'.encode())
         c.close()
