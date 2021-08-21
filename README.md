@@ -4,6 +4,8 @@
 
 Objective: Easily and Effectively Obtain Information from the Robot for Debugging and Planning.
 
+[GitHub - ThatCrispyToast/Robot-Readouts](https://github.com/ThatCrispyToast/Robot-Readouts)
+
 # TODO
 
 - [x]  [Establish Inter-Device Communation](#sockets)
