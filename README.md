@@ -62,10 +62,12 @@ public class Sending {
         clientSocket.close();
     }
 
-    public void send(String msg) throws UnknownHostException, IOException {
+    public void send(double rotation, double motortl, double motortr, double motorbl, double motorbr, String status) throws UnknownHostException, IOException {
         Sending client = new Sending();
         client.startConnection("AniketsPC", 14892);
-        String response = client.sendMessage(msg);
+        String response = client.sendMessage(String.format(
+        "{'Rotation': %.4f, 'Motors': (%.1f,%.1f,%.1f,%.1f), 'Status': '%s'}",
+        rotation, motortl, motortr, motorbl, motorbr, status));
         // System.out.println(response);
         client.stopConnection();
     }
@@ -108,7 +110,15 @@ import java.net.UnknownHostException;
 public class Main {
     public static void main(String[] args) throws UnknownHostException, IOException {
         Sending client = new Sending();
-        client.send("Hello!");
+				
+		double rotation = 0.0000;
+        double motortl = 1.0;
+        double motortr = -1.0;
+        double motorbl = 1.0;
+        double motorbr = -1.0;
+        String status = "Data Sent!";
+				
+        client.send(rotation, motortl, motortr, motorbl, motorbr, status);
     }
 }
 ```
