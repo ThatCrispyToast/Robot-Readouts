@@ -6,12 +6,12 @@ Objective: Easily and Effectively Obtain Information from the Robot for Debuggin
 
 # TODO
 
-- [x]  [Establish Inter-Device Communation]()
+- [x]  [Establish Inter-Device Communation](#sockets)
     - [x]  Sending Class
     - [x]  Recieving Script
     - [x]  Sub Decisecond Communcation
 - [ ]  Send Appropriate Data from Robot to Client
-- [ ]  [Develop Client-Side Readout of Recieved Data]()
+- [ ]  Develop Client-Side Readout of Recieved Data
     - [x]  (Pre-Build) Emulate Recieved Data
     - [x]  Parse Recieved Data
     - [ ]  Interpret Data Visually
