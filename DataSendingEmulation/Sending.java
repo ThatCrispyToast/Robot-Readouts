@@ -27,10 +27,12 @@ public class Sending {
         clientSocket.close();
     }
 
-    public void send(String msg) throws UnknownHostException, IOException {
+    public void send(double rotation, double motortl, double motortr, double motorbl, double motorbr, String status) throws UnknownHostException, IOException {
         Sending client = new Sending();
         client.startConnection("AniketsPC", 14892);
-        String response = client.sendMessage(msg);
+        String response = client.sendMessage(String.format(
+        "{'Rotation': %.4f, 'Motors': (%.1f,%.1f,%.1f,%.1f), 'Status': '%s'}",
+        rotation, motortl, motortr, motorbl, motorbr, status));
         // System.out.println(response);
         client.stopConnection();
     }

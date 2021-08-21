@@ -1,6 +1,6 @@
 import socket
 
-response = "{'Rotation': 0.0000, 'Motors': ('PWR','PWR','PWR','PWR')}"
+response = "{'Rotation': 0.0000, 'Motors': ('PWR','PWR','PWR','PWR'), 'Status': 'No Data Recieved.'}"
 
 def recieve():
     global response

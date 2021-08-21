@@ -39,6 +39,10 @@ def draw_window(WIN, font, bot):
         MotorText = font.render(f'{motorName}: {motor}', True, WHITE)
         MotorTextRect = MotorText.get_rect(center=(WIDTH/11, (HEIGHT/6) + (placement)))
         WIN.blit(MotorText, MotorTextRect)
+        
+    StatusText = font.render(f'Status: {data["Status"]}', True, WHITE)
+    StatusTextRect = StatusText.get_rect(center=(WIDTH/2, HEIGHT-FONT_SIZE))
+    WIN.blit(StatusText, StatusTextRect)
     
     pygame.display.update()
 
