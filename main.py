@@ -5,7 +5,8 @@ import logging, time
 
 # Init Pygame Variables
 WIDTH, HEIGHT = 800, 600
-FONT_SIZE = 30
+BOT_WIDTH, BOT_HEIGHT =  int(WIDTH / 2.083), int(HEIGHT / 1.357)
+FONT_SIZE = int(HEIGHT / 20)
 GRAY = (18, 18, 18)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -67,6 +68,7 @@ def readout():
     pygame.display.set_icon(pygame.image.load('assets/radar.png'))
 
     bot = pygame.image.load("assets/bot.png")
+    bot = pygame.transform.scale(bot, (BOT_WIDTH, BOT_HEIGHT))
 
     font = pygame.font.SysFont('Calibri', FONT_SIZE)
 
