@@ -4,13 +4,22 @@ import pygame
 import logging, time
 
 # Init Pygame Variables
-WIDTH, HEIGHT = 800, 600
-BOT_WIDTH, BOT_HEIGHT =  int(WIDTH / 2.083), int(HEIGHT / 1.357)
+WIDTH, HEIGHT = 1280, 480
+BOT_WIDTH, BOT_HEIGHT =  int(HEIGHT/8), int(HEIGHT/8)
 FONT_SIZE = int(HEIGHT / 20)
-GRAY = (18, 18, 18)
+
+GRAY = (44, 44, 44)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+BLUE = (47, 100, 220)
+RED = (255, 24, 27)
+
+ICON = 'assets/radar.png'
+BOT = 'assets/bot.png'
+FIELD = 'assets/ultimategoalfield.png'
+
 FPS = 60
+
 
 # Init Logging
 logging.basicConfig(filename='response.log',
@@ -28,32 +37,39 @@ def rot_center(image, angle, x, y):
     return rotated_image, new_rect
 
 
-def draw_window(WIN, font, bot):
+def draw_window(WIN, font, bot, field):
     data = eval(receiving.response)
     rotation = data["Rotation"]
 
     WIN.fill(GRAY)
+    
+    pygame.draw.line(WIN, WHITE, (WIDTH/2, 0), (WIDTH/2, HEIGHT), 1)
+    
+    # pygame.draw.rect(WIN, WHITE, pygame.Rect(WIDTH/16, 0, HEIGHT, HEIGHT), 1)
+    pygame.draw.line(WIN, RED, (WIDTH/16 - 2, 0), (WIDTH/16 - 2, HEIGHT), 8)
+    pygame.draw.line(WIN, BLUE, (WIDTH/16 + HEIGHT, 0), (WIDTH/16 + HEIGHT, HEIGHT), 8)
+    WIN.blit(field, (WIDTH/16, 0))
 
-    bot, botPos = rot_center(bot, -rotation, WIDTH/2, HEIGHT/2)
+    bot, botPos = rot_center(bot, -rotation, WIDTH/8, HEIGHT - BOT_HEIGHT/2)
 
     WIN.blit(bot, botPos)
 
     rotationText = font.render(f'Rotation: {rotation}', True, WHITE)
-    rotationTextRect = rotationText.get_rect(center=(WIDTH/2, HEIGHT/20))
+    rotationTextRect = rotationText.get_rect(center=(WIDTH * 3/4, HEIGHT/20))
     WIN.blit(rotationText, rotationTextRect)
 
     MotorText = font.render('Motors:', True, WHITE)
-    MotorTextRect = MotorText.get_rect(center=(WIDTH/11, HEIGHT/6))
+    MotorTextRect = MotorText.get_rect(center=(WIDTH* 3/4, HEIGHT/6))
     WIN.blit(MotorText, MotorTextRect)
 
     for motor, placement, motorName in zip(data['Motors'], [30, 60, 90, 120], ['TL', 'TR', 'BL', 'BR']):
         MotorText = font.render(f'{motorName}: {motor}', True, WHITE)
         MotorTextRect = MotorText.get_rect(
-            center=(WIDTH/11, (HEIGHT/6) + (placement)))
+            center=(WIDTH * 3/4, (HEIGHT/6) + (placement)))
         WIN.blit(MotorText, MotorTextRect)
 
     StatusText = font.render(f'Status: {data["Status"]}', True, WHITE)
-    StatusTextRect = StatusText.get_rect(center=(WIDTH/2, HEIGHT-FONT_SIZE))
+    StatusTextRect = StatusText.get_rect(center=(WIDTH* 3/4, HEIGHT-FONT_SIZE))
     WIN.blit(StatusText, StatusTextRect)
 
     pygame.display.update()
@@ -65,10 +81,13 @@ def readout():
     WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
     pygame.display.set_caption("Virtual Bot")
-    pygame.display.set_icon(pygame.image.load('assets/radar.png'))
+    pygame.display.set_icon(pygame.image.load(ICON))
 
-    bot = pygame.image.load("assets/bot.png")
+    bot = pygame.image.load(BOT)
     bot = pygame.transform.scale(bot, (BOT_WIDTH, BOT_HEIGHT))
+    
+    field = pygame.image.load(FIELD)
+    field = pygame.transform.scale(field, (HEIGHT, HEIGHT))
 
     font = pygame.font.SysFont('Calibri', FONT_SIZE)
 
@@ -80,7 +99,7 @@ def readout():
             if event.type == pygame.QUIT:
                 run = False
 
-        draw_window(WIN, font, bot)
+        draw_window(WIN, font, bot, field)
 
 
 def log():
