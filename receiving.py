@@ -1,6 +1,7 @@
 import socket
 
-response = "{'Rotation': 0.0000, 'Motors': ('PWR','PWR','PWR','PWR'), 'Status': 'No Data Recieved.'}"
+response = "{'Rotation': 0.0000, 'Motors': ('PWR','PWR','PWR','PWR'), 'Status': 'No Data Received.'}"
+
 
 def recieve():
     global response
@@ -10,7 +11,7 @@ def recieve():
     port = 14892
 
     s.bind(('', port))
-    print("Binded to %s" % (port))
+    print("Bound to %s" % (port))
 
     s.listen(5)
     print("Listening...")
@@ -18,5 +19,5 @@ def recieve():
     while True:
         c, addr = s.accept()
         response = c.recv(1024)[:-2].decode()
-        # c.send(f'Recieved {response}!'.encode())
+        # c.send(f'Received {response}!'.encode())
         c.close()

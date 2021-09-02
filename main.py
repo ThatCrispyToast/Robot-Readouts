@@ -1,11 +1,14 @@
+import logging
 import threading
-import receiving
+import time
+
 import pygame
-import logging, time
+
+import receiving
 
 # Init Pygame Variables
 WIDTH, HEIGHT = 1280, 480
-BOT_WIDTH, BOT_HEIGHT =  int(HEIGHT/8), int(HEIGHT/8)
+BOT_WIDTH, BOT_HEIGHT = int(HEIGHT/8), int(HEIGHT/8)
 FONT_SIZE = int(HEIGHT / 20)
 
 GRAY = (44, 44, 44)
@@ -26,7 +29,7 @@ logging.basicConfig(filename='response.log',
                     format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG, filemode='w')
 
 
-def recieve():
+def receive():
     receiving.recieve()
 
 
@@ -114,7 +117,7 @@ def log():
 
 if __name__ == "__main__":
     t1 = threading.Thread(target=readout)
-    t2 = threading.Thread(target=recieve)
+    t2 = threading.Thread(target=receive)
     t3 = threading.Thread(target=log)
 
     t2.daemon = True

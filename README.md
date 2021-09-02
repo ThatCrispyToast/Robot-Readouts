@@ -131,7 +131,7 @@ import recieving
 import time
 
 def recieve():
-    recieving.recieve()
+    recieving.receive()
   
 def main():
     while True:
